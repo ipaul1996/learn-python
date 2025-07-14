@@ -1,0 +1,28 @@
+A virtual environment in Python is like a special, isolated folder on your computer 
+where you can install Python, any libraries and packages you need—without affecting other projects 
+or the main Python(Global) installation.
+
+Create --> python3 -m venv venv
+python3: calls python3 interpreter; -m venv: run the built-in venv module;
+venv: name of the folder where your new virtual environment will be created. 
+You can name it anything, but venv is a common convention.
+
+Activate --> source venv/bin/activate
+When you “activate” it, any Python or pip commands you run will use this folder 
+instead of the system-wide Python.
+
+Deactivate --> You can turn off the virtual environment with "deactivate" command.
+
+venv/
+├── bin/        
+├── lib/         
+├── include/     
+├── pyvenv.cfg 
+
+bin/ (or Scripts/): Tools to activate the environment and run Python/pip inside the venv.
+
+lib/: Contains the Python standard library and all packages you install with pip.
+
+include/: Needed if you install packages that require compiling code.
+
+pyvenv.cfg: Stores settings about your virtual environment.
