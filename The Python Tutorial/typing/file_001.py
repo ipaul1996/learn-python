@@ -1,4 +1,11 @@
-from typing import Optional, Any
+# The built-in 'typing' module enables you to add type hints to Python code.
+# Type hints help:
+# - Make code easier to understand and maintain.
+# - Improve editor support and autocompletion.
+# - Allow static type checkers (like mypy) to catch bugs before runtime.
+
+
+from typing import Optional, Any, Union
 
 # Variable Annotation
 age: int = 30
@@ -21,7 +28,7 @@ def greet(name: str) -> str:
 
 
 # Function Returning Multiple Possible Types
-def parse_id(val: str) -> int | None:
+def parse_id(val: str) -> int | None:  # Not Recommended
     try:
         return int(val)
     except ValueError:
@@ -37,3 +44,20 @@ def parse_id_v2(val: str) -> Optional[int]:
 
 
 # Optional[int]: shorthand for X | None.
+
+
+def parse_int(s: str) -> Union[int, str]:
+    try:
+        return int(s)
+    except ValueError:
+        return s
+
+
+def parse(value: str) -> int | float | str:
+    try:
+        return int(value)
+    except ValueError:
+        try:
+            return float(value)
+        except ValueError:
+            return value

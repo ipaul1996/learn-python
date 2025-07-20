@@ -4,11 +4,11 @@
 a = True
 b = False
 print(a and b)  # Output: False
-# Explanation: 'and' returns True only if both operands are True.
+# Explanation: 'and' returns True only if both operands are True, otherwise False.
 
 # Logical OR
 print(a or b)   # Output: True
-# Explanation: 'or' returns True if at least one operand is True.
+# Explanation: 'or' returns True if at least one operand is True, otherwise False.
 
 # Logical NOT
 print(not a)    # Output: False
