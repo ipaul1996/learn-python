@@ -33,7 +33,40 @@ def example_function():
 result = example_function()
 print(result)  # None
 print(type(result))  # <class 'NoneType'>
+print(type(example_function))  # <class 'function'>
 
 
 # Get the name of the type as a string using __name__ attribute
-print(type(42.0).__name__) # float
+print(type(42.0).__name__)  # float
+
+
+print(type(example_function))  # <class 'function'>
+
+
+"""
+1. dir() 
+It lists the attributes and methods of objects, classes, or modules.
+Usage:
+- dir(object) — Lists all valid attributes, methods, and properties of the object.
+- dir() — Lists names in the current local scope.
+Useful for exploring what you can do with an object or module.
+Does not show documentation, only names.
+
+Examples:
+dir(list)           # Lists all methods and attributes of list
+dir(Dog)            # Lists all methods and attributes of Dog class
+dir()               # Lists names in the current scope
+
+******************************
+
+2. help()
+It displays documentation for objects, classes, functions, or modules.
+
+Usage:
+- help(object) — Shows docstring, methods, and usage info.
+- help() — Starts an interactive help utility in the Python shell.
+
+Examples:
+help(list)           # Info about lists
+help(Dog.get_name)   # Info about a method
+"""

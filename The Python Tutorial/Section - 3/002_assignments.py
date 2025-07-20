@@ -20,8 +20,18 @@ fruits = ["apple", "banana", "cherry"]  # Ordered, mutable sequence
 coordinates = (10.0, 20.0)  # Ordered, immutable sequence
 coordinatesV2 = 10.0, 20.0  # Parentheses are optional when defining a tuple
 
+# If the tuple has single element,
+coordinatesV3 = (10.0,)
+# If we do (10.0) it will be considered as a number, not a tuple
+
 # Dictionary Assignment (key-value pairs)
-person = {"name": "Alice", "age": 30, "city": "New York"}
+person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York",
+    "isMarried": False,
+    "family": ["Pichhi", "Mimi"],
+}
 
 # Set Assignment
 unique_numbers = {1, 2, 3, 4, 5}  # Unordered, mutable collection of unique elements
@@ -44,11 +54,6 @@ async      elif       if         or         yield
 a, b, c = 1, 2, 3  # Assigning multiple values to multiple variables
 print(a, b, c)  # Output: 1 2 3
 
-# Swapping values using tuple unpacking
-x = 1
-y = 2
-x, y = y, x
-print(x, y)  # Output: 2 1
 
 # ************************************************
 
@@ -77,6 +82,12 @@ print(a, b, c)  # Output: 1 [2, 3] 4
 coords = (7, 8, 9)
 x1, y1, z1 = coords  # x1=7, y1=8, z1=9
 
+# Swapping values using tuple unpacking
+x = 1
+y = 2
+x, y = y, x
+print(x, y)  # Output: 2 1
+
 r, p, *rest = (1, 2, 3, 7)
 print(r, p, rest)  # Output: 1 2 [3, 7]
 
@@ -104,10 +115,12 @@ print(k1, k2, k3)  # x y z
 
 # To unpack values:
 v1, v2, v3 = d.values()
+# d.values() --> Returns a view object displaying a list of all the values in the dictionary.
 print(v1, v2, v3)  # 100 200 300
 
 # To unpack items (key-value pairs):
-(item1, item2, item3) = d.items()
+item1, item2, item3 = d.items()
+# d.items() --> Returns a view object displaying a list of the dictionary’s key-value pairs as tuples.
 print(item1, item2, item3)  # ('x', 100) ('y', 200) ('z', 300)
 
 

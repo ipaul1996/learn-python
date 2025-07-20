@@ -50,6 +50,12 @@ print(squares)  # [0, 4, 9, 16, 25, 36, 49, 64, 0, 4, 9, 16, 25, 36, 49, 64, 81]
 # Both variables refer to the same list object in memory.
 another_list = squares
 print(id(squares) == id(another_list))  # True: both refer to the same object
+print(
+    id(squares), id(another_list)
+)  # 4309678720 4309678720 # identical memory addresses
+print(another_list is squares)  # True: both refer to the same object
+# The id() function in Python returns the “identity” of an object(the memory address where
+# the object is stored). This identity is unique and constant for the object during its lifetime.
 
 # Modifying the list through one variable affects the other,
 # since they are just two names for the same list.
@@ -63,16 +69,19 @@ print(squares)  # [100, 4, 9, 16, 25, 36, 49, 64, 0, 4, 9, 16, 25, 36, 49, 64, 8
 # This can change the size of the list or even clear it entirely.
 
 # syntax: list[start:end:step] = iterable
-# - start (default 0): index to start from (inclusive)
-# - end (default len(list)): index to stop at (exclusive)
-# - step (default 1): interval between indices to replace
+# - start: Index of the list to begin replacing (inclusive). Defaults to 0, if omitted.
+# - end: Index of the list to stop replacing (exclusive). Defaults to len(list), if omitted.
+# - step: How many indices to skip between replacements. Defaults to 1.
+# - iterable: The sequence of new values to assign to the selected slice.
 #
 # If step is 1 (or omitted):
 #   - If start < end, replaces elements from start (included) to end (excluded) with elements from the iterable.
 #   - If start == end or start > end, inserts elements from the iterable at the start index.
 #
 # If step is not 1:
-#   - The number of elements in the slice and the iterable must be the same.
+#   - The slice selects non-contiguous elements (for example, every second or third element) in the list for replacement.
+#   - The number of items in the iterable must exactly match the number of elements selected by the slice in the list.
+#   - Each element in the iterable replaces the corresponding element at the positions of the list specified by the slice.
 #   - Elements at positions start, start+step, start+2*step, ... are replaced by elements from the iterable.
 fruits = ["apple", "banana", "cherry"]
 fruits[1:2] = ["blueberry", "blackberry"]  # Replace "banana" with two new fruits
@@ -105,6 +114,14 @@ d = [1, 2, 3, 4, 5, 6]
 d[::2] = [0] * (len(d) // 2)
 print(d)  # [0, 2, 0, 4, 0, 6]
 
+# Replace every third element with -1
 m = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 m[::3] = [-1] * (len(m) // 3)
 print(m)  # [-1, 1, 2, -1, 4, 5, -1, 7, 8]
+
+# Replace every second element between indices x and y (not including y) with -2
+x = 1
+y = 5
+p = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+p[x:y:2] = [-2] * ((y - x) // 2)
+print(p)  # [0, -2, 2, -2, 4, 5, 6, 7, 8]
