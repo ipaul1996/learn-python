@@ -5,7 +5,8 @@
 from typing import Dict, Union
 
 # We use the 'type' statement for type aliases:
-type ConfigType = Dict[str, Union[str, int, bool, None]]
+# type ConfigType = Dict[str, Union[str, int, bool, None]]
+type ConfigType = dict[str, str | int | bool | None]
 # This declares an alias named ConfigType.
 
 
@@ -18,7 +19,7 @@ def load_config() -> ConfigType:
 
 
 # Alternatively,
-ConfigTypeV2 = Dict[str, Union[str, int, bool, None]]
+ConfigTypeV2 = Dict[str, Union[str, int, bool, None]]  # Old approacg
 
 
 def load_config_v2() -> ConfigTypeV2:
