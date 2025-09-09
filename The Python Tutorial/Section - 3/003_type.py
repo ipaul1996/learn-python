@@ -45,12 +45,15 @@ print(type(example_function))  # <class 'function'>
 
 """
 1. dir() 
-It lists the attributes and methods of objects, classes, or modules.
+Provides a list of names (attributes and methods) belonging to an object or within 
+the current scope. It's a quick way to see what's available.
+
 Usage:
-- dir(object) — Lists all valid attributes, methods, and properties of the object.
+- dir(object) — Lists all valid attributes and methods of the object.
 - dir() — Lists names in the current local scope.
-Useful for exploring what you can do with an object or module.
-Does not show documentation, only names.
+
+Use dir() when you want a quick reminder of an object's capabilities without the details. 
+It answers the question, "What names are associated with this?"
 
 Examples:
 dir(list)           # Lists all methods and attributes of list
@@ -60,11 +63,15 @@ dir()               # Lists names in the current scope
 ******************************
 
 2. help()
-It displays documentation for objects, classes, functions, or modules.
+Displays the official documentation (the docstring) for an object, method, or module. 
+It's used to understand how to use something.
 
 Usage:
-- help(object) — Shows docstring, methods, and usage info.
+- help(object) — Shows the full documentation, including function signatures and descriptions.
 - help() — Starts an interactive help utility in the Python shell.
+
+Use help() when you need a detailed explanation of what something does, what arguments it takes, 
+and what it returns. It answers the question, "How do I use this?"
 
 Examples:
 help(list)           # Info about lists

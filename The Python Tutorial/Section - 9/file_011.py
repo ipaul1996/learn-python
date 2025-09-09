@@ -16,15 +16,16 @@ class DerivedClassName(module_name.BaseClassName):
 """
 
 # When a derived class is defined, Python stores its base class as part of its definition.
-# Attribute and method lookups on an instance of the derived class first search the derived class itself;
+# Data attribute and method lookups on an instance of the derived class first search the derived class itself;
 # if not found, Python automatically searches up the inheritance chain through the base classes.
 # This process continues recursively if there are multiple levels of inheritance.
 
 
-# Derived classes can override methods from their base classes.
-# When a method in the base class calls another method (even one defined in the base class),
-# it may actually call an overridden version in the derived class if it exists.
-# This is because method calls are always resolved using the actual type of the object.
+# A derived class can override methods defined in its base class.
+# When a method in a base class calls another method via `self`, the call is not fixed to the base class's version.
+# Instead, Python dynamically looks up the method on the actual object's class at runtime.
+# This means a base class method might end up calling an overridden version from a derived class.
+# This powerful feature is a core part of polymorphism, known as dynamic dispatch.
 class Base:
     def greet(self):
         self.say_hello()

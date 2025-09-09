@@ -120,8 +120,9 @@ print(v1, v2, v3)  # 100 200 300
 
 # To unpack items (key-value pairs):
 item1, item2, item3 = d.items()
-# d.items() --> Returns a view object displaying a list of the dictionary’s key-value pairs as tuples.
 print(item1, item2, item3)  # ('x', 100) ('y', 200) ('z', 300)
+# d.items() --> Returns a view object displaying a list of the dictionary’s key-value pairs as tuples.
+# dict_items([('x', 100), ('y', 200), ('z', 300)])
 
 
 info = {"a": 10, "b": 20, "c": 30, "d": 40}

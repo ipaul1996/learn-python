@@ -1,4 +1,5 @@
-# Wrong design: Using mutable objects as class variables
+# Wrong design: Using mutable objects as class data attribute
+# It will be shared accross all the instances of the class & can be modified by any instance
 class Dog:
 
     tricks = []  # mistaken use of a class variable

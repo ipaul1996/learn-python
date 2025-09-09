@@ -24,8 +24,11 @@ class B(A):
 
 
 def call_parent_greet(obj):
-    # Explicitly call A's greet using super
-    super(B, obj).greet()
+    if isinstance(obj, B):
+        # Explicitly call A's greet using super
+        super(B, obj).greet()
+    else:
+        print("Invalid argument provided")
 
 
 b = B()

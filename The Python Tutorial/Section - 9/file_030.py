@@ -14,19 +14,33 @@
 class MyClass:
     def __init__(self):
         self.public_var = "I am public"
-        self._protected_var = "I am protected (by convention)"
-        self.__private_var = "I am private (name mangled)"
+        self._internal_var = "I am for internal use (by convention)"
+        self.__mangled_var = "I am name-mangled to avoid conflicts"
 
-    def get_private(self):
-        return self.__private_var
+    def get_mangled(self):
+        """A public method to provide controlled access to the mangled variable."""
+        return self.__mangled_var
 
 
 obj = MyClass()
+
+# Public attributes are meant for direct access.
 print(obj.public_var)  # Accessible
-print(obj._protected_var)  # Accessible, but discouraged
-# print(obj.__private_var)  # AttributeError: 'MyClass' object has no attribute '__private_var'
 
-# Accessing the name-mangled private variable directly (not recommended)
-print(obj._MyClass__private_var)  # Accessible via name mangling
+# Internal-use attributes are accessible, but it's a violation of convention.
+print(obj._internal_var)
 
-print(obj.get_private())  # Preferred way to access private data
+# Direct access to a name-mangled attribute will fail with an AttributeError.
+try:
+    print(obj.__mangled_var)
+except AttributeError as e:
+    print(f"\nAttempting to access obj.__mangled_var failed:")
+    print(f" -> {e}")
+
+# You can still access the mangled variable if you know the mangled name. (Discouraged)
+print("\nAccessing the mangled name directly (not recommended):")
+print(obj._MyClass__mangled_var)  # type: ignore
+
+# The preferred approach is to use a public method if access is needed.
+print("\nAccessing via a public getter method:")
+print(obj.get_mangled())

@@ -13,5 +13,19 @@ while count < 5:
     count += 1  # Increment count
 
 
+# Example: The following while loop will continue to iterate indefinitely
+# until it receives a valid number.
+number = 0
 
+while not (1 <= number <= 10):
+    try:
+        user_input = input("Please enter a number between 1 and 10: ")
+        number = int(user_input)
 
+        if not (1 <= number <= 10):
+            print("Invalid number. Please try again.")
+
+    except ValueError:
+        print("That's not a number! Please try again.")
+
+print(f"Great! You entered the number {number}.")

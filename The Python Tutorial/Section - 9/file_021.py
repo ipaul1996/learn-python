@@ -1,5 +1,5 @@
 # __init__
-# Called after the instance is created and used to initialize instance attributes.
+# Called immediately after the instance is created and used to initialize instance attributes.
 # Signature: def __init__(self, *args, **kwargs) -> None
 
 # Use Cases:

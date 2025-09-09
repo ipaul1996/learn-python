@@ -35,7 +35,7 @@ print(add.__doc__)  # Prints the docstring of the add function
 print("doesn't")
 print("doesn't")
 print('"Yes," they said.')
-print('"Yes," they said.')
+print("'Yes,' they said.")
 print('"Isn\'t," they said.')
 
 s = "First line.\nSecond line."  # \n is a newline character

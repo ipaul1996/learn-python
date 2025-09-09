@@ -8,7 +8,6 @@ class Version2(Version):
         return self < other or self == other
 
     def __ne__(self, other):
-        # Python 3 would use not __eq__, but we can define it explicitly
         if not isinstance(other, Version2):
             return NotImplemented
         return not self == other

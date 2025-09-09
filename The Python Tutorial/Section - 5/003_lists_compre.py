@@ -1,9 +1,11 @@
 # List Comprehensions
-# List comprehensions provide a concise way to create lists.
-# It consists of brackets containing an expression followed by a for clause,
-# then zero or more for or if clauses.
-# The result will be a new list resulting from evaluating the expression in the context of the for
-# and if clauses that follow it.
+# List comprehensions are a concise way to create lists in Python.
+# The syntax is: [expression for item in iterable if condition]
+# - 'expression' is evaluated for each item in the iterable.
+# - 'for item in iterable' loops over each element.
+# - 'if condition' is optional and filters which items are included.
+# List comprehensions can replace loops for building lists, making code shorter and more readable.
+
 
 # Let's create a list of squares:
 squares = [x**2 for x in range(10)]

@@ -22,8 +22,11 @@ else:
 # If none of the conditions are true, the else block is executed if it exists.
 
 
-# The if statement can also be used to check for multiple conditions using logical operators like and, or, and not.
+# The if statement can also be used to check for multiple conditions using logical operators like - and, or, not.
 y = int(input("Please enter another integer: "))
+# input() always returns a string.
+# To get other types (like int or float), you need to convert the input.
+# If the input string cxan not be converted into a string, we get ValueError exception.
 
 if x > 0 and y > 0:
     print("Both numbers are positive")

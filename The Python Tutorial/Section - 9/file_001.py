@@ -1,21 +1,4 @@
-# Classes in Python provides a way to bundle data and functionality together.
-# A class is like a blueprint for creating objects (instances).
-# Creating a new class means creating a new type of object. We can create multiple
-# instances of that type.
-# Each instance of a class can have its own attributes, known as instance attributes, which store data unique to that object.
-# These attributes represent the state of the object.
-# Classes can also define methods—functions that belong to the class—which operate on instance attributes.
-# Methods are used to access, modify, or perform actions using the state of an instance.
-# Python supports class inheritance, allowing a class (derived class) to inherit attributes and methods from one or more base classes.
-# The derived class can override or extend the functionality of its base class by redefining methods.
-# In Python, class members (attributes and methods) are public by default, except for private variables using naming conventions.
-# All methods explicitly take the instance as the first argument, usually named 'self'.
-# Classes are themselves objects in Python, allowing dynamic creation and modification.
-# Built-in types can be extended by user-defined classes.
-# Special methods (like arithmetic operators and subscripting) can be redefined for class instances to customize their behavior.
-
-
-# A namespace in Python is simply a mapping from names (identifiers) to objects, implemented as dictionaries.
+# A namespace(symbol table) in Python is simply a mapping from names (identifiers) to objects, implemented as dictionaries.
 # Namespaces are used to ensure that names in a program do not conflict with each other.
 
 # Local namespace
@@ -34,7 +17,7 @@
 # - Created when the interpreter starts.
 # - Contains names built into the interpreter (len, int, Exception, etc.).
 # - Always available, unless explicitly shadowed by a global or local definition.
-# - The built-in names actually also live in a module; this is called builtins.
+# - The built-in names actually also live in a module; this is called "builtins" module.
 
 
 # Scope
@@ -112,7 +95,6 @@ module1.foo()  # Prints 10, not 99!
 
 # Any new name (from assignments, import, or def) is added to the local scope by default.
 
-
 # The global statement tells Python that a variable inside a function should refer to the variable 
 # in the global (module-level) scope, not create a new local variable.
 # This lets you change the global variable from inside the function.
@@ -120,22 +102,5 @@ module1.foo()  # Prints 10, not 99!
 # The nonlocal statement tells Python that a variable inside a nested function should refer to a variable 
 # in the nearest enclosing (but not global) function’s scope.
 # This lets you change a variable from an outer function inside an inner function.
-
-
-
-
-
-
-
-
-
-# An attribute is any name that comes after a dot.
-# For example, in z.real, 'real' is an attribute of the object z.
-# When you write modname.funcname, 'modname' is a module object and 'funcname' is an attribute of that module.
-
-# Attributes may be read-only or writable. In the latter case, assignment to attributes is possible. 
-# Module attributes are writable: you can write modname.the_answer = 42. Writable attributes may also be 
-# deleted with the del statement. For example, del modname.the_answer will remove the attribute the_answer 
-# from the object named by modname.
 
 

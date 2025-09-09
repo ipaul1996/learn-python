@@ -1,0 +1,226 @@
+### The Python Tutorial
+
+**************************************************************************
+
+## Section - 3
+
+Arithmatic Operators (+, -, *, /, //, **, Unary Operators)
+Floating Point Arithmatic, Complex Number
+Arithmetic Operator precedence
+
+Integer, Float, String, Boolean, List, Tuple, Dictionary, Set Assignment
+Multiple Assignment, List, Tuple, Set, Dictionary Unpacking
+Extended Unpacking with * Operators
+keys(), values(), items()
+type operator, __name__, dir(), help()
+
+
+Strings
+Single Quote, Double Quote, Multiline, Docstring
+Escape Sequence, \n, \t
+Raw Strings(r), Formatted String Literals(f), rf combination
+String Concatenation (with + and space), String Repetition, String Length
+String Index[+ve, -ve], 
+String Slicing - default values for start & end, start and end equal, Out-of-range indices as start & end
+Immutability
+
+Lists
+Mutable, Ordered Sequence, heterogeneous elements, neted lists
+Indexing
+Modifying Lists, Concatenation, Repetition, len function, append
+list slicing --> access, insert, replace, remove
+
+**************************************************************************
+
+## Section - 4
+Logical Operators(and, or, not), Truthy and Falsy Values, __bool__() and __len()__ method
+Assignment Operators(=, +=, -=, *=, /=, //=, %=, **=), Walrus Operator
+Comparison Operators(==, !=, <, <=, >, >=) & if statement, input function, int() & float() method
+Combining multiple comparison operators using logical operators
+Membership Operators(in, not in) - list, tuple, set, string, dictionary keys, dictionary values
+Identity Operators(is, is not), id(obj) function, identity vs equality
+for loop, len function, enumerate function, sep & end parameters in the print function,
+keys(), values(), items(), copy()
+while loop
+break, continue, else statements
+range function
+pass statement
+match statement - subject expression, pattern, binding, Literal Pattern, Capture Pattern,
+Wildcard Pattern, OR Pattern, Sequence Pattern, Class pattern, Guard
+
+functions:
+introduction, local symbol table, global symbol table, global statement, nonlocal statement, parameter, argument
+function object, multiple name for the same function, method
+default values for function parameters(What it is?/When is it set?), problem with mutable default value
+positional arguments and keyword arguments
+*args and **kwargs 
+position-only parameters, Position or Keyword parameter, keyword-only parameter
+lambda function, higher-order function
+map, lazy evaluation, map with multiple iterables
+filter, lazy evaluation, filter with None
+operator module
+reduce
+sorted
+zip
+enumerate
+truthy & falsy value
+any
+all
+decorators
+
+**************************************************************************
+
+## Section - 5
+list methods
+append, extend, insert, remove, pop, clear, count, copy, reverse
+list.index(x[, start[, end]]), list.sort(*, key=None, reverse=False)
+list as stack 
+deque(append, popleft, appendleft, pop, clear, extend(iterable), extendleft(iterable), rotate(n=1))
+list comprehension, del statement
+
+string methods
+upper, isupper, lower, islower, capitalize, isalpha, isalnum
+center, count, endswith, startswith, strip, find, index
+join, split, replace
+
+tuples are immutable, nested tuple, empty tuple, tuple can be used as dictionary key
+
+set - difference, union, intersection, symmetric difference
+methods: add, remove, discard, pop, clear
+set comprehension
+
+dictionary
+empty dictionary, accessing values, get method
+Iterating over keys, values, and items, enumerate
+copy, clear, pop, popitem, merging dictionaries(using ** and update method)
+fromkeys, list of tuples to dictionary using dict method
+dictionary comprehension, len method
+nested dictionary, dictionary unpacking
+
+**************************************************************************
+
+
+## Section - 9
+namespace(symbol table) - local, global, built-in
+scope - local, enclosing, global, built-in, LEGB rule, nonlocal & global statement
+class - bundling data & functionality, bluprint, creating a type
+inheritance, derived class, self parameter, attribute
+class object: Instantiation, Attribute Reference, class data attribute
+instance object: Attribute Reference, Function Object, Method Object, instacce data attribute, state
+mutable objects as class data attribute
+attribute lookup priority
+data hiding is by convention not enforcement
+assigining external functions to class attribute
+methods of same class can call each other
+A method resolves non-local variables from the module's global scope, not the surrounding class scope.
+__class__, type(obj)
+derived class - method overriding
+Base.greet(self) from Derived
+isinstance(obj, Class), We can derive from built-in functions, issubclass(c1, c2)
+Multiple Inheritance, object class
+MRO(__mro__)
+1. Class precedence rule
+2. Local precedence rule
+3. Montonicity
+Object creation process:
+inst = MyClass.__new__(MyClass, arg1, arg2)
+MyClass.__init__(inst, arg1, arg2)
+__repr__(self), __str__(self)
+__eq__(self, other), __ne__(self, other)
+__gt__(self, other), __lt__(self, other)
+__ge__(self, other), __le__(self, other)
+NotImplemented
+from functools import total_ordering
+Comparison of built-ins: Numbers(int, float), Strings, Sequences(list, tuple), mappings
+sets, unrelated types
+super(), super(ThisClass, instance_of_cls)
+private variables, name mangling
+dataclass, field, frozen=True, order=True, slots=True
+iterator(iterable, iterator, __iter__, __next__)
+Iterable & Iterator are different objects
+Iterable is Iterator the same object
+StopIteration
+__slots__, Multiple Inheritance and __slots__
+classmethod
+staticmethod
+@property (@score.setter, @score.deleter)
+EAFP (Easier to Ask Forgiveness than Permission)
+Method overriding
+Abstract Base classes and abstract method
+__dict__ and vars()
+__call__
+
+**************************************************************************
+
+typing module:
+int, str, tuple, list, dict, set, Any, Optional(pipe operator |), Union
+Literal
+Dict
+type alias
+NewType
+TypeVar - invariant, covariant, contravariant
+Generic
+Protocol
+Final
+@final
+Sequence
+MutableSequence
+Mapping
+MutableMapping
+Set
+AbstractSet
+Iterable
+Iterator
+Callable
+TypedDict, Required, NotRequired
+Annotated
+ParamSpec
+
+**************************************************************************
+exception_handling:
+error: syntax error, exception
+try → except* → else → finally
+raise
+Custom Exceptions
+
+
+**************************************************************************
+generator functions:
+
+
+
+
+**************************************************************************
+enum module:
+
+
+
+**************************************************************************
+datetime module:
+
+
+
+
+**************************************************************************
+json module:
+
+
+
+
+**************************************************************************
+collections module:
+
+
+
+**************************************************************************
+itertools module:
+
+
+
+**************************************************************************
+asyncio
+
+
+
+**************************************************************************
+

@@ -1,11 +1,13 @@
-# map function
-# map(function, iterable, *iterables) → map object
-# - Returns an iterator that applies a function to each item in an iterable.
-# - The map() function returns a lazy iterator, meaning it computes results on demand.
-# Values are only produced when you iterate over the map object (e.g., with a for loop 
-# or by converting to a list or tuple or set).
+# map(function, iterable, *iterables) -> map object
+# - Applies function to each element of the provided iterable(s), returning an iterator of results.
+# - When additional iterables are supplied, function is called with one element from each iterable 
+#   in parallel.
+# - The returned map object computes values on-the-fly as you iterate over it; no results are
+#   calculated until needed.(lazy evaluation)
 # - The original iterables are not modified.
+# - Stops when the shortest iterable is exhausted.
 # - Works with any iterable (lists, tuples, sets, etc.).
+
 
 characters = ['a', 'b', 'c', 'd']
 print(map(str.upper, characters))         # <map object at 0x1010eb7f0>

@@ -36,8 +36,9 @@ def kwd_only_arg(*, arg):
     print(arg)
 
 
-def combined_example(pos_only, /, standard, *, kwd_only):
-    print(pos_only, standard, kwd_only)
+def combined_example(pos_only, /, pos_or_kwd, *, kwd_only):
+    print(pos_only, pos_or_kwd, kwd_only)
+
 
 # ******************************************************
 # This function demonstrates a potential collision between a positional argument 'name'
@@ -45,19 +46,22 @@ def combined_example(pos_only, /, standard, *, kwd_only):
 # it will override the positional argument, which can lead to confusion.
 def foo(name, **kwds):
     # Checks if 'name' is present in the keyword arguments
-    return 'name' in kwds
+    return "name" in kwds
+
 
 # The following call would raise a TypeError because 'name' is given both positionally and as a keyword:
 # foo(1, name=2)
 # foo(1, **{'name': 2})
 
+
 # To avoid this ambiguity, we can make 'name' a positional-only parameter using the '/' syntax.
-def foo(name, /, **kwds):
+def fooV2(name, /, **kwds):
     # Now, 'name' must be passed positionally, and any 'name' in **kwds is a separate entry.
-    return 'name' in kwds
+    return "name" in kwds
+
 
 # Here, 'name' is passed as a keyword argument, so 'name' is present in kwds and returns True.
-print(foo(1, name=2))  # Output: True
+print(fooV2(1, name=2))  # Output: True
 
 # Here, 'name' is passed via dictionary unpacking, so again 'name' is present in kwds and returns True.
-print(foo(1, **{'name': 2}))  # Output: True
+print(fooV2(1, **{"name": 2}))  # Output: True

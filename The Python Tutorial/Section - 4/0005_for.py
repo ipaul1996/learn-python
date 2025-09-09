@@ -1,6 +1,7 @@
 # 'for'
 # The 'for' statement iterates over the items of any sequence (like lists, tuples, 
 # strings, or dictionaries) in the order they appear.
+# We use for loop when we have a finite sequence of items to be iterated.
 
 # Example: Iterating over a list
 words = ["hello", "world", "python", "rocks"]
@@ -63,8 +64,8 @@ for item in users.items():
     print("Key is", key, "and value is", value)
 
 # Note:
-# Modifying a collection while iterating over it can lead to unexpected behavior.
-# To avoid issues, iterate over a copy or build a new collection.
+# Deleting items from a dictionary while iterating over it will raise a RuntimeError.
+# To safely modify the dictionary, you should iterate over a shallow copy.
 
 # Strategy 1: Iterate over a copy to safely modify the original dictionary
 for user, status in users.copy().items():

@@ -10,7 +10,7 @@ async def work():
 
 
 # If we do work() here, it will not run it's body, instead it will return a coroutine object.
-# Until we await this coroutine object or wrap it in a Task, nothing in demo actually executes.
+# Until we await this coroutine object or wrap it in a Task, nothing in work actually executes.
 
 print(type(work()))  # <class 'coroutine'>
 

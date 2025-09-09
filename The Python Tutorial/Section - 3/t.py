@@ -1,19 +1,25 @@
-squares = [1, 4, 9, 16, 25]
+fruits = ["Dog", "Cat", "Cow"]
 
-squares[1:3] = [5, 1]
-print(squares)  # [1, 5, 1, 16, 25]
+fruits_immutable = ("Dog", "Cat", "Cow")
 
-squares[1:1] = [0, 0, 0]
-print(squares)  # [1, 0, 0, 0, 5, 1, 16, 25]
+fruits_immutable1 = "Dog", "Cat", "Cow"
 
-squares[0:1] = []
-print(squares)  # [0, 0, 0, 5, 1, 16, 25]
+print(fruits_immutable)
+print(fruits_immutable1)
 
-squares[:] = []
-print(squares)
 
-x = 1
-y = 5
-p = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-p[x:y:2] = [-2] * ((y - x) // 2)
-print(p)  # [0, -2, 2, -2, 4, 5, 6, 7, 8]
+person = {"name": "Alice", "age": 30, "City": "New York"}
+
+unique_numbers = {1, 2, 3, 4, 5}
+
+nothing = None
+
+a, b, c = 1, 2, 3
+
+m, n, o = [4, -2, 8]
+
+nums = [1, 2, 3, 4, -2, 8]
+
+k, p, *rest = nums
+
+print(rest)

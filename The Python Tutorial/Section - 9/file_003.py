@@ -1,9 +1,9 @@
 class Dog:
 
-    kind = "canine"  # class variable shared by all instances
+    kind = "canine"  # class data attributes shared by all instances
 
     def __init__(self, name):
-        self.name = name  # instance variable unique to each instance
+        self.name = name  # instance data attributes are unique to each instance
 
 
 d = Dog("Fido")

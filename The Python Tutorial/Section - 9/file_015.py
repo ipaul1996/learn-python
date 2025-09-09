@@ -24,8 +24,9 @@ O = object
 # 3. Monotonicity (“never break ancestor chains”): If in any base’s own MRO you see X before Y,
 # then in the final MRO for C, X must still come before Y.
 
-# Together, these three properties ensure a single, unambiguous search path for method/attribute lookup, and when they can’t all be satisfied the C3 merge
-# fails with a TypeError: Cannot create a consistent method resolution order (MRO) for bases….
+# Together, these three properties ensure a single, unambiguous search path for method/attribute 
+# lookup, and when they can’t all be satisfied the C3 merge fails with a TypeError: Cannot create 
+# a consistent method resolution order (MRO) for bases….
 
 
 class A:

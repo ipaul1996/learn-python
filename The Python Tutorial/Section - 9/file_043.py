@@ -20,6 +20,14 @@ class Vehicle(ABC):
     def stop(self):
         """Cease movement"""
 
+    @abstractmethod
+    def hello(self): ...
+
+
+# ... --> It is called the Ellipsis object. They act as a placeholder for code
+# that will be implemented later. Alternatively, we can use pass. But ... is often
+# used for abstract methods
+
 
 class Car(Vehicle):
     def start(self):
@@ -27,6 +35,9 @@ class Car(Vehicle):
 
     def stop(self):
         print("Car engine off")
+
+    def hello(self):
+        print("Hello World!")
 
 
 class Bike(Vehicle):
@@ -36,4 +47,4 @@ class Bike(Vehicle):
 
 # v = Vehicle()  # TypeError: Can't instantiate abstract class Vehicle without an implementation for abstract methods 'start', 'stop'
 # b = Bike() # TypeError: Can't instantiate abstract class Bike without an implementation for abstract method 'stop'
-c = Car()  # ✅ OK
+c = Car()  # OK

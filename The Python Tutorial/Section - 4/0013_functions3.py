@@ -1,4 +1,4 @@
-# We can specify a default value for one or more arguments.
+# We can specify a default value for one or more parameters.
 # This creates a function that can be called with fewer arguments
 # than it is defined to allow.
 def greet(name, greeting="Hello"):
@@ -9,6 +9,8 @@ greet("Alice")  # Uses default greeting
 greet("Bob", "Good morning")  # Uses custom greeting
 
 
+# In Python, all required parameters (those without a default value) must be listed
+# before all optional parameters (those with a default value).
 def power(base, exponent=2):
     return base**exponent
 
@@ -16,7 +18,7 @@ def power(base, exponent=2):
 print(power(3))  # Uses default exponent (prints 9)
 print(power(2, 5))  # Uses custom exponent (prints 32)
 
-# Default argument values are set when the function is defined, not when it is called.
+# Default parameter values are set when the function is defined, not when it is called.
 i = 5
 
 def f(arg=i):
@@ -34,10 +36,11 @@ def append_to_list(value, lst=[]):
     lst.append(value)
     return lst
 
-print(append_to_list(1))        # [1]
-print(append_to_list(2))        # [1, 2]
-print(append_to_list(3, []))    # [3] (new list, does not share with previous calls)
-print(append_to_list(4))        # [1, 2, 4] (shares the default list)
+
+print(append_to_list(1))  # [1]
+print(append_to_list(2))  # [1, 2]
+print(append_to_list(3, []))  # [3] (new list, does not share with previous calls)
+print(append_to_list(4))  # [1, 2, 4] (shares the default list)
 
 
 # To avoid this, you can use None as a default value and create a new list inside the function if needed.
@@ -47,9 +50,8 @@ def append_to_list_safe(value, lst=None):
     lst.append(value)
     return lst
 
-print(append_to_list_safe(1))      # [1]
-print(append_to_list_safe(2))      # [2] (new list, does not share with previous calls)
+
+print(append_to_list_safe(1))  # [1]
+print(append_to_list_safe(2))  # [2] (new list, does not share with previous calls)
 print(append_to_list_safe(3, []))  # [3] (new list, does not share with previous calls)
-print(append_to_list_safe(4))      # [4] (new list, does not share with previous calls)
-
-
+print(append_to_list_safe(4))  # [4] (new list, does not share with previous calls)

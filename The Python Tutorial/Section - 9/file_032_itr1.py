@@ -1,3 +1,5 @@
+# Iterator
+
 # Iterable: any Python object you can loop over (e.g., list, tuple, string). An iterable 
 # implements __iter__(), returning an iterator. 
 
@@ -21,4 +23,5 @@ try:
         print(number)
 except StopIteration:
     print("Reached the end of the iterator.") 
+
 

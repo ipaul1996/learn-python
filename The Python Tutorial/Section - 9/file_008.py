@@ -1,6 +1,4 @@
-# Methods may call other methods by using method attributes of the self argument:
-
-
+# Methods of the same class can call each other using the 'self' keyword:
 class Bag:
     def __init__(self):
         self.data = []
@@ -11,5 +9,3 @@ class Bag:
     def add_twice(self, x):
         self.add(x)
         self.add(x)
-
-

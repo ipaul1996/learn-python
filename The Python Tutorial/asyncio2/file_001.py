@@ -5,7 +5,7 @@
 
 # Event loop: The scheduler that runs and switches between asynchronous tasks.
 
-# Coroutines: Special functions defined with async def that can be pause and resume via await.
+# Coroutines: Special functions defined with async def that can be paused and resumed via await.
 # Calling it (e.g. main()) doesn’t run its body; it just returns a coroutine object(a types.Coroutine instance)
 # which can be awaited or scheduled to run by the event loop (using asyncio.run() from the top level
 # or using asyncio.create_task()).

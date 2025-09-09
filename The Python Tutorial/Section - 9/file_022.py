@@ -1,19 +1,22 @@
+# repr, str
+
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
 
     def __repr__(self):
         """
+        Official string representation of the object, primarily for developers.
         __repr__ should return a string that, when passed to eval(), recreates the object.
-        It is mainly intended for developers and debugging.
         If __str__ is not defined, __repr__ is used as a fallback by str() and print().
         """
         return f"Point({self.x}, {self.y})"
 
     def __str__(self):
         """
+        Informal string representation of the object, intended for end users.
         __str__ should return a readable, informal string representation of the object.
-        It is intended for end users and is used by print() and str().
+        It is used by print() and str().
         If __str__ is not defined, __repr__ is used instead.
         """
         return f"({self.x}, {self.y})"

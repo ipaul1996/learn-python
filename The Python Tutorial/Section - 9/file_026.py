@@ -1,14 +1,16 @@
 # Comparison with built-ins
 
 # Numbers (int, float)
-# Support: ==, !=, <, <=, >, >=
-print(3 == 3.0)  # True   (int and float compare numerically)
-print(3 < 5)  # True
-print(3 <= 3)  # True
-print(10 > 7)  # True
-print(5 >= 5.0)  # True
-# All six operators work because int and float define __eq__, __lt__, etc.,
-# and fall back to cross‐type implementations when needed.
+# Supported comparisons: ==, !=, <, <=, >, >=
+# Numeric types (int, float) can be compared directly using all six comparison operators.
+# Comparisons are based on numeric value, not type, so int and float values are considered equal if their values are the same.
+print(3 == 3.0)  # True   (int and float compare numerically, so 3 == 3.0)
+print(3 < 5)  # True     (3 is less than 5)
+print(3 <= 3)  # True    (3 is equal to 3)
+print(10 > 7)  # True    (10 is greater than 7)
+print(5 >= 5.0)  # True  (5 is equal to 5.0, so >= is True)
+# All six operators work because numeric types implement the necessary comparison methods,
+# and Python automatically handles comparisons between int and float.
 
 
 # Strings
@@ -40,7 +42,7 @@ print({"a": 1, "b": 2} == {"b": 2, "a": 1})  # True   (order doesn’t matter)
 print({"a": 1} != {"a": 2})  # True
 
 try:
-    print({} < {})
+    print({} < {})  # type: ignore
 except TypeError as e:
     print(f"TypeError: {e}")  # '<' not supported between instances of 'dict' and 'dict'
 
@@ -81,6 +83,7 @@ examples = [
 
 for left, right, op in examples:
     try:
+        result = False
         # Dynamically perform the comparison based on the operator
         if op == "<":
             result = left < right

@@ -15,7 +15,7 @@ class Base:
 class Derived(Base):
     def greet(self):
         # Call the base class method first
-        Base.greet(self)
+        Base.greet(self)  # or super().greet()
 
         # Add extra behavior
         print("...and hello from Derived")
