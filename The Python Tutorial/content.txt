@@ -154,9 +154,7 @@ __call__
 
 typing module:
 int, str, tuple, list, dict, set, Any, Optional(pipe operator |), Union
-Literal
-Dict
-type alias
+Literal, Dict, type alias
 NewType
 TypeVar - invariant, covariant, contravariant
 Generic
