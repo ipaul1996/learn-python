@@ -1,0 +1,21 @@
+Features of Python:
+- Dynamically typed language, type checking happens at runtime.
+- User friendly syntax.
+- Readability (proper indented code).
+
+Drawback:
+- Low execution speed compared to C, C++, Java.
+
+
+Block Structure:
+In python indention is used group statements. Generally, 4 spaces are used for indentation (tab is discouraged).
+
+| Block 1 Starts     
+|     Block 2 Starts
+|         Block 3 Starts
+|         Block 3 Ends     
+|     Block 2 Ends
+| Block 1 Ends
+
+
+

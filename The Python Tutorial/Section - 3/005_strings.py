@@ -44,7 +44,7 @@ s = "First line.\tSecond line."  # \t is a tab character
 print(s)  # Prints the string with a tab
 
 # If we don’t want characters prefaced by \ to be interpreted as special characters,
-# we can use raw strings by adding an r before the first quote
+# we can use raw strings by adding an r before the first quote.
 s1 = r"First line.\nSecond line."  # Raw string
 print(s1)  # First line.\nSecond line.
 

@@ -1,5 +1,6 @@
 # Variables are dynamically typed in Python, meaning we don't need to declare their type explicitly.
 # Variable name can contain letters, numbers, and underscores, but cannot start with a number.
+# In Python everything is object. So, variables are names that reference objects.
 
 # Integer Assignment
 x = 10  # An assignment statement (variable, operator, value)
@@ -24,7 +25,7 @@ coordinatesV2 = 10.0, 20.0  # Parentheses are optional when defining a tuple
 coordinatesV3 = (10.0,)
 # If we do (10.0) it will be considered as a number, not a tuple
 
-# Dictionary Assignment (key-value pairs)
+# Dictionary Assignment (key-value pairs, mutable)
 person = {
     "name": "Alice",
     "age": 30,

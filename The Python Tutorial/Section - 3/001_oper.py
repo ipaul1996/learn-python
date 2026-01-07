@@ -1,7 +1,10 @@
-print("Hello World!")
+print("Hello World!")   # print('Hello World!')
 print("Any", "number", "of", "arguments")
+print("Hello Bro, 'Indrajit'")
+print('Hello Bro, "Indrajit"')
 
 # Comment
+# There is no dedicated syntax for multiline comments, for that we can use single line comment multiple times or docstring.
 
 # integer number has type int and decimal number has type float
 x = 10

@@ -23,6 +23,60 @@ def factorial(n):
         return n * factorial(n - 1)
 
 
+# Parameter: A variable listed inside the parentheses in the function definition.
+# Example: In def add(a, b):, a and b are parameters.
+
+# Argument: The value that is sent to the function when it is called.
+# Example: In add(2, 3), 2 and 3 are arguments.
+
+
+"""
+How Arguments Are Passed in Python?
+-----------------------------------
+
+Python does NOT use "pass by value" or "pass by reference" like C/C++.
+Python uses "Pass by Object Reference" (also called "Pass by Assignment").
+
+1. Variables are names that reference objects.
+2. When you pass a variable, you pass the reference to the object.
+3. The function receives a copy of the reference, not a copy of the object.
+
+Therefore,
+- Immutable objects (int, str, tuple): Function cannot modify original
+- Mutable objects (list, dict, set): Function CAN modify original
+
+"""
+
+# Immutable - original unchanged
+def modify_int(n):
+    n = n + 1  # Creates NEW object, rebinds local variable
+    return n
+
+
+x = 10
+modify_int(x)
+print(x)  # 10 (unchanged)
+
+
+# Mutable - original changed
+def modify_list(lst):
+    lst.append(4)  # Modifies SAME object
+
+
+my_list = [1, 2, 3]
+modify_list(my_list)
+print(my_list)  # [1, 2, 3, 4] (changed!)
+
+
+# Rebinding vs Mutating
+def rebind(lst):
+    lst = [4, 5, 6]  # Rebinds local variable to NEW object (original unaffected)
+
+
+def mutate(lst):
+    lst.append(4)  # Mutates the SAME object
+
+
 # The execution of a function introduces a new symbol table used for the
 # local variables of the function. More precisely, all variable assignments
 # in a function store the value in the local symbol table specific to a particular execution;
@@ -34,8 +88,10 @@ def factorial(n):
 # named in a global statement, or, for variables of enclosing functions,
 # named in a nonlocal statement), although they may be referenced.
 
-# Note: While global/enclosing variables cannot be directly reassigned without global/nonlocal, 
+# Note: While global/enclosing variables cannot be directly reassigned without global/nonlocal,
 # mutating them is possible without these declarations if they are mutable objects (e.g., lists, dictionaries).
+# This is because mutation does not rebind the variable name; it
+# modifies the object the name already references.
 
 x = "global x"
 y = "global y"
@@ -78,52 +134,3 @@ outer: outer y
 global before change_global: global x global y
 global after change_global: changed global x global y
 """
-
-
-# The arguments to a function call are introduced in the local symbol table of the called function
-# when it is called; thus, arguments are passed using call by value (where the value is always an object reference,
-# not the value of the object). When a function calls another function, or calls itself recursively, a new local symbol
-# table is created for that call.
-def foo(a):
-    print("foo's a:", a)
-    a = 10
-    print("foo's a after assignment:", a)
-
-
-b = 5
-print("global b before foo:", b)
-foo(b)
-print("global b after foo:", b)
-
-
-def bar(lst):
-    print("bar's lst:", lst)
-    lst.append(4)
-    print("bar's lst after append:", lst)
-
-
-my_list = [1, 2, 3]
-print("global my_list before bar:", my_list)
-bar(my_list)
-print("global my_list after bar:", my_list)
-
-"""
-Output:
-
-global b before foo: 5
-foo's a: 5
-foo's a after assignment: 10
-global b after foo: 5
-
-global my_list before bar: [1, 2, 3]
-bar's lst: [1, 2, 3]
-bar's lst after append: [1, 2, 3, 4]
-global my_list after bar: [1, 2, 3, 4]
-"""
-
-
-# Parameter: A variable listed inside the parentheses in the function definition.
-# Example: In def add(x, y):, x and y are parameters.
-
-# Argument: The value that is sent to the function when it is called.
-# Example: In add(2, 3), 2 and 3 are arguments.
