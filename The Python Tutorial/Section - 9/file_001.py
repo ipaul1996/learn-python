@@ -1,16 +1,26 @@
+# Namespace (The Containers)
 # A namespace(symbol table) in Python is simply a mapping from names (identifiers) to objects, implemented as dictionaries.
-# Namespaces are used to ensure that names in a program do not conflict with each other.
+# It is the specific place in memory where a variable lives.
 
 # Local namespace
-# - Created when a function (or method) is invoked.
+# - Created each time a function (or method) is invoked (not when defined).
 # - Holds names defined within that function (parameters, locally assigned variables).
 # - Discarded when the function returns or raises an exception that is not handled within the function.
-# - Recursive invocations each have their own local namespace.
+# - Note: Every recursion creates a unique, separate local namespace.
+
 
 # Global namespace
-# - Created when the module definition is read in.
-# - Holds names defined at the top level of that module (module variables, function and class definitions).
+# - Created when the module (file) definition is read in.
+# - Holds names defined at the top level of that module (imports, functions, classes, module constants).
 # - Persists until the module is unloaded or the interpreter exits.
+
+
+# Class Namespace
+# - Created when the class definition is executed (Python classes are executable statements).
+# - Holds names defined in the class body (methods, class variables/attributes).
+# - It becomes the attribute dictionary (__dict__) of the class object.
+# - Unlike functions, a class namespace is NOT automatically used as a enclosing scope for the methods inside it.
+#   (This is why you must use 'self.variable' or 'ClassName.variable' inside methods).
 
 
 # Built‑in namespace
@@ -20,35 +30,48 @@
 # - The built-in names actually also live in a module; this is called "builtins" module.
 
 
-# Scope
-# A scope defines the region of a Python program where a namespace is directly accessible.
-# “Directly accessible” means that an unqualified reference to a name will search for that name in the current namespace.
+# Scope (The Search Rules)
+# A scope defines a textual region of a Python program where a namespace is directly accessible.
+# "Directly accessible" means you can use the name without a prefix (e.g., 'x' instead of 'module.x').
 # Scopes are determined statically (by the structure of the code), but used dynamically (at runtime).
-# At any point during execution, Python uses a well-defined order to resolve names, known as the "LEGB" rule:
-# - Local scope: Names assigned within the current function or method.
-# - Enclosing scope: Names in any enclosing functions (for nested functions), searched from inner to outer.
-# - Global scope: Names defined at the top level of the current module.
-# - Built-in scope: Names preassigned in Python (such as len, int, Exception, etc.).
-# Python searches these scopes in the above order when resolving names.
 
-# If we use the global keyword inside a function, we tell Python to use the variable from the module’s global scope 
-# (outside all functions), not create a new local variable.
+# The LEGB Rule (How Python connects Scope to Namespace):
+# When you type a name, Python searches the namespaces in this exact order:
+# - Local scope (L): Names assigned within the current function or method.
+# - Enclosing scope (E): Names in any enclosing functions (for nested functions), searched from inner to outer.
+# - Global scope (G): Names defined at the top level of the current module.
+# - Built-in scope (B): Names preassigned in Python (such as len, int, Exception, etc.).
 
-# If we want to modify a variable from an enclosing function (not global, but not local either), use the nonlocal keyword.
+# If the name is not found in any of these, Python raises a NameError.
+# Note: Class Namespaces do not fit the LEGB rule.
 
-# If we don’t use global or nonlocal, assigning to a variable inside a function will always create a new local variable, 
-# even if a variable with the same name exists outside.
+
+# - If you only READ a variable (print(x)), Python looks up the scopes (LEGB) to find it.
+# - If you ASSIGN a variable (x = 10), Python creates a new LOCAL variable by default.
+#   (This shadows any outer variable with the same name).
+
+# THE "global" KEYWORD
+# - Used inside a function to refer to a variable in the Global (Module) scope.
+# - Use this if you need to ASSIGN (change) a global variable's value from inside a function.
+# - "I am not creating a new local 'x', I am updating the module's 'x'."
+
+# THE "nonlocal" KEYWORD
+# - Used inside a nested function (inner) to refer to a variable in the nearest Enclosing scope.
+# - It skips the Global scope. It looks strictly in the outer functions.
+# - Use this to update a variable in a parent function from insidse the current function.
 
 x = 10  # Global variable
 def outer():
-    y = 20  # Enclosing variable
+    y = 20  # Enclosing variable (Local to outer)
 
     def inner():
-        global x
-        nonlocal y
+        global x     # Point to the top-level x
+        nonlocal y   # Point to 'outer's 'y'
+
         x = 100      # Changes the global x
         y = 200      # Changes y in outer()
-        z = 300      # Local to inner()
+        z = 300      # New variable, local to 'inner'
+
         print("inner:", x, y, z)
 
     inner()
@@ -61,18 +84,17 @@ print("global:", x)
 # outer: 100 200
 # global: 100
 
-# At the top level of a file, the local scope is the same as the global scope — the module’s namespace.
-# In a class, local scope = class’s own namespace (for class attributes and methods).
 
-
-# Scopes are determined by where code is written (textually), not where or how it’s called.
-# If you define a function in a module, its global scope is always that module’s namespace—even 
-# if you call the function from somewhere else or using a different name.
+# A function's "Global Scope" is the module where it was DEFINED,
+# not the module where it is CALLED.
+# When you import a function, you are importing a reference to it.
+# You are NOT copying the code into your current file.
+# The function still "lives" in its original module and sees that module's global variables.
 
 """
 # module1.py
 def foo():
-    print(x)
+    print(x)     # This 'x' is permanently bound to module1's global scope
 
 x = 10
 
@@ -80,10 +102,11 @@ x = 10
 # module2.py
 import module1
 
-x = 99
-module1.foo()  # Prints 10, not 99!
-# Even though you call foo() from module2, it looks for x in module1’s global namespace, 
-# because that’s where foo was defined.
+x = 99          # This is 'x' in module2's namespace
+module1.foo()   # Prints 10, not 99!
+
+# When foo() runs, it looks for 'x' in its own global namespace (module1).
+# It does not know or care about module2's 'x'.
 
 """
 
@@ -94,13 +117,3 @@ module1.foo()  # Prints 10, not 99!
 # The object that x was pointing to still exists if there are other names or variables pointing to it.
 
 # Any new name (from assignments, import, or def) is added to the local scope by default.
-
-# The global statement tells Python that a variable inside a function should refer to the variable 
-# in the global (module-level) scope, not create a new local variable.
-# This lets you change the global variable from inside the function.
-
-# The nonlocal statement tells Python that a variable inside a nested function should refer to a variable 
-# in the nearest enclosing (but not global) function’s scope.
-# This lets you change a variable from an outer function inside an inner function.
-
-

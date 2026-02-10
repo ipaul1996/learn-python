@@ -158,11 +158,11 @@
 
 | # | Topic                      | File                                          |
 |---|----------------------------|-----------------------------------------------|
-| 1 | try, except Basics         | [file_001.py](exception_handling/file_001.py) |
-| 2 | Multiple Except Blocks     | [file_002.py](exception_handling/file_002.py) |
-| 3 | else & finally Clauses     | [file_003.py](exception_handling/file_003.py) |
-| 4 | Raising Exceptions (raise) | [file_004.py](exception_handling/file_004.py) |
-| 5 | Custom Exception Classes   | [file_005.py](exception_handling/file_005.py) |
+| 1 | Intro to Exception         | [file_001.py](exception_handling/file_001.py) |
+| 2 | try, except Basics         | [file_002.py](exception_handling/file_001.py) |
+| 3 | Raise Exception            | [file_003.py](exception_handling/file_003.py) |
+| 4 | Custom Exception Classes   | [file_004.py](exception_handling/file_004.py) |
+| 4 | Add Note                   | [file_005.py](exception_handling/file_005.py) |
 
 ---
 

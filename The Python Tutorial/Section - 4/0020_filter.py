@@ -1,5 +1,6 @@
 # filter function
 # filter(function, iterable) -> filter object
+# - A higher order function
 # - Applies the function to each element of the iterable.
 # - Returns an iterator yielding only those elements for which the function returns True.
 # - If function is None, returns elements that are true (non-false) by default.
@@ -8,6 +9,7 @@
 # - The original iterable is not modified.
 # - Stops when the iterable is exhausted.
 # - Works with any iterable (lists, tuples, sets, etc.).
+# - For the items for which the passeds function returns False filter discard those items.
 
 numbers = [1, 2, 3, 4, 5, 6]
 

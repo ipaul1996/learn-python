@@ -1,8 +1,8 @@
-# *args(Arguments): Gathers a variable number of positional arguments into a tuple.
+# *args(Variable Positional Arguments): Gathers a variable number of positional arguments into a tuple.
 # The name "args" is a convention; the asterisk (*) is the crucial syntax.
 # It allows a function to be called with more positional arguments than formally defined.
 
-# **kwargs(Keyword Arguments): Gathers a variable number of keyword arguments into a dictionary.
+# **kwargs(Variable Keyword Arguments): Gathers a variable number of keyword arguments into a dictionary.
 # The name "kwargs" is a convention; the double asterisk (**) is the crucial syntax.
 # It allows a function to handle named arguments that it doesn't explicitly define.
 
@@ -91,15 +91,17 @@ Phone: 555-1234
 
 
 """
-Summary:
-========
 
 * (Single Asterisk)
   - In a function definition (e.g., def my_func(*args)): It packs all extra positional arguments into a single tuple.
   - In a function call (e.g., my_func(*my_list)): It unpacks an iterable (like a list, tuple, string, range object) into separate positional arguments.
+  - * on LHS, gather remaining items: a, *remaining = [1, 2, 3, 4] => remaining = (2, 3, 4)
+  - * on RHS (inside [] or ()), scatter the items, combined = [*list_a, *list_b]
 
 ** (Double Asterisk)
   - In a function definition (e.g., def my_func(**kwargs)): It packs all extra keyword arguments into a single dictionary.
   - In a function call (e.g., my_func(**my_dict)): It unpacks a dictionary into separate keyword arguments.
+  - ** on LHS: NOT SUPPORTED. You cannot gather remaining key-value pairs in a standard assignment (e.g., `x, **rest = my_dict` is a SyntaxError).
+  - ** on RHS (inside {}), scatters the key-value pairs (Dictionary Merging), combined = {**dict_a, **dict_b}
 
 """

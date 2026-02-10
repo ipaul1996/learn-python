@@ -5,7 +5,7 @@ __get__(self, instance, owner)
 __set__(self, instance, value)
 __delete__(self, instance)
 
-Think of a descriptor as an "agent" or "gatekeeper" for a class attribute. When you assign a descriptor
+A descriptor as an "agent" or "gatekeeper" for a class attribute. When you assign a descriptor
 object to a class attribute, that agent intercepts any attempt to interact with that attribute on instances
 of the class.
 
@@ -39,7 +39,6 @@ descriptors have a lower priority. If an instance has an entry in its __dict__ w
 the __dict__ entry will be used instead of the descriptor.
 
 """
-
 
 class NonNegative:
     """A descriptor that ensures an attribute is a non-negative integer."""

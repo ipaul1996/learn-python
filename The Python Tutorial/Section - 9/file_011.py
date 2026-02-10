@@ -15,10 +15,9 @@ class DerivedClassName(BaseClassName):
 class DerivedClassName(module_name.BaseClassName):
 """
 
-# When a derived class is defined, Python stores its base class as part of its definition.
-# Data attribute and method lookups on an instance of the derived class first search the derived class itself;
+# When a derived class is defined, Python stores its base class as part of its definition (derived class's `__bases__` attribute). Data attribute and method lookups on an instance of the derived class first search the derived class itself;
 # if not found, Python automatically searches up the inheritance chain through the base classes.
-# This process continues recursively if there are multiple levels of inheritance.
+# This process continues recursively if there are multiple levels of inheritance (as per MRO).
 
 
 # A derived class can override methods defined in its base class.

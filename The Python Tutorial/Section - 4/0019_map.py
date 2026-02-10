@@ -1,4 +1,5 @@
 # map(function, iterable, *iterables) -> map object
+# - A higher order function.
 # - Applies function to each element of the provided iterable(s), returning an iterator of results.
 # - When additional iterables are supplied, function is called with one element from each iterable 
 #   in parallel.

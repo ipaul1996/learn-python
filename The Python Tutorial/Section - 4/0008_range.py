@@ -1,8 +1,14 @@
 # range(stop)
 # range(start, stop[, step])
-# start: The value of the start parameter (or 0 if the parameter was not supplied)
-# stop: The value of the stop parameter
-# step: The value of the step parameter (or 1 if the parameter was not supplied)
+# Rule: [ ] means "Optional"
+
+# start: The first number in the sequence (inclusive). Defaults to 0 if omitted.
+# stop:  The number where the sequence ends (exclusive). The sequence stops one step before this value.
+# step:  The increment (or difference) between each number. Defaults to 1 if omitted.
+
+# Return Value: Returns an immutable sequence object (not a list).
+# Note: It generates numbers on demand ("lazy evaluation") to save memory.
+
 print(list(range(10)))  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 print(tuple(range(10))) # (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 print(list(range(1, 10))) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -26,7 +32,3 @@ a = ['Mary', 'had', 'a', 'little', 'lamb']
 
 for i in range(len(a)):
     print(i, a[i])
-
-
-
-

@@ -27,15 +27,14 @@ print(not (x == 5))  # Output: False
 # Explanation: x == 5 is True, so not inverts the result i.e., False
 
 
-
 # In Python, the logical operators and, or, and not can be used with any object.
 # Every object in Python has an inherent boolean value. An object is considered "truthy"
 # if it evaluates to True in a boolean context, and "falsy" if it evaluates to False.
-# Falsy Values: False, None, 0, 0.0, 0j, "", [], (), empty dictionbary -> {}, empty set -> Set(), 
-# range(0), Decimal(0), Fraction(0, 1). 
+# Falsy Values: False, None, 0, 0.0, 0j, "", [], (), empty dictionbary -> {}, empty set -> Set(),
+# range(0), Decimal(0), Fraction(0, 1).
 # Truthy Values: Everything else is considered truthy.
-# An object you create will also be falsy if its special __bool__() method returns False or __len__() 
-# method returns 0.
+# An object you create will also be falsy if its special __bool__() method returns False or __len__()
+# method returns 0. If neither is defined, the object is Truthy.
 
 # or --> It returns the first truthy value it finds. If all values are falsy, it returns the last value.
 # The or operator uses short-circuit evaluation, meaning it stops evaluating as soon as it encounters a truthy value.

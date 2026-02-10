@@ -16,11 +16,18 @@
 #   read-only, raising an error if you try to modify a field after creation.
 # - Ordering: The argument `order=True` automatically generates comparison methods
 #   (__lt__, __le__, __gt__, __ge__), allowing instances to be sorted.
+# - Fields without defaults must come before fields with defaults.
+# - Never use mutable objects as defaults directly, use field(default_factory=...) instead.
 # - Memory Efficiency: For Python 3.10+, `slots=True` can be used to generate a
 #   __slots__ attribute, resulting in faster attribute access and lower memory usage.
 # - Advanced Field Control: The `field()` function allows for fine-grained
 #   control over each attribute, such as providing mutable default values
 #   using `default_factory`.
+
+# How It Works
+# - The @dataclass decorator inspects the class's __annotations__ dictionary.
+# - It finds all attributes with type hints.
+# - It generates methods and injects them into the class.
 
 from dataclasses import dataclass, field
 
@@ -106,3 +113,39 @@ item.tags.append("grocery")
 
 print(f"\nImmutable item: {item}")
 # InventoryItem(name='Banana', unit_price=0.79, quantity=100, tags=['fruit', 'yellow', 'grocery'])
+
+
+# ---------------------------------------------------------------
+"""
+field() Parameters:
+- default - Default value for the field
+- default_factory - Function that returns default value (for mutable types)
+- init - Include in __init__? (default: True)
+- repr - Include in __repr__? (default: True)
+- compare - Include in __eq__ and ordering? (default: True)
+- hash - Include in __hash__? (default: None uses compare value)
+- metadata - Dictionary for storing arbitrary metadata
+
+
+Dataclass Decorator Parameters:
+@dataclass(
+    init=True,        # Generate __init__?
+    repr=True,        # Generate __repr__?
+    eq=True,          # Generate __eq__?
+    order=False,      # Generate __lt__, __le__, __gt__, __ge__?
+    unsafe_hash=False,# Generate __hash__?
+    frozen=False      # Make instances immutable?
+)
+class Example:
+    value: int
+
+    
+
+We must view the @dataclass decorator not as a runtime enforcer, but as a compile-time code generator.
+When we define a dataclass, the decorator scans our class for variable annotations. It then generates 
+methods like __init__, __repr__, and __eq__ and attaches them to our class. Crucially, the generated __init__ 
+method performs raw assignment. It does not inspect the value we pass in, nor does it look at the type hint 
+to decide if a cast is necessary. It simply takes the object reference we provide and binds it to the instance 
+attribute. Thus no runtime data validation or data conversion is possible. For that we need pydantic v2.
+
+"""

@@ -50,8 +50,8 @@ def foo(name, **kwds):
 
 
 # The following call would raise a TypeError because 'name' is given both positionally and as a keyword:
-# foo(1, name=2)
-# foo(1, **{'name': 2})
+# foo(1, name=2)  # Parameter "name" is already assigned
+# foo(1, **{'name': 2}) # Parameter "name" is already assigned
 
 
 # To avoid this ambiguity, we can make 'name' a positional-only parameter using the '/' syntax.

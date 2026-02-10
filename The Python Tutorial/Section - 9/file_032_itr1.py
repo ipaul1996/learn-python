@@ -1,12 +1,12 @@
 # Iterator
 
-# Iterable: any Python object you can loop over (e.g., list, tuple, string). An iterable 
-# implements __iter__(), returning an iterator. 
+# Iterable (The Container): any Python object you can loop over (e.g., list, tuple, string). An iterable
+# implements __iter__(), returning an Iterator object.
 
-# Iterator: the object that does the actual stepping through an iterable.
+# Iterator (The Cursor/Bookmark): the object that does the actual stepping through an iterable.
 # An iterator must implement two methods:
 #   1. __iter__() — returns the iterator object itself.
-#   2. __next__() — returns the next item from the sequence. Raises StopIteration when no more items.
+#   2. __next__() — returns the next item from the sequence. Raises StopIteration exception when no more items.
 
 numbers = [1, 2, 3, 4, 5]
 
@@ -24,4 +24,8 @@ try:
 except StopIteration:
     print("Reached the end of the iterator.") 
 
-
+"""
+- State: The list (numbers) doesn't change. The iterator (itr) changes state every time you call next().
+- One-time use: Iterators are usually "exhaustible." Once you go through them, you cannot reset them. 
+  You must create a new iterator from the iterable to loop again.
+"""

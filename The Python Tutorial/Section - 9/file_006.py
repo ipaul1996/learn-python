@@ -6,7 +6,6 @@
 # responsibility to respect these conventions. Additionally, new attributes
 # can be added to objects at runtime unless explicitly prevented.
 
-
 class MyClass:
     def __init__(self, value):
         self.value = value  # public attribute

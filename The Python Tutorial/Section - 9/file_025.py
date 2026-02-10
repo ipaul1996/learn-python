@@ -20,9 +20,9 @@ class Version3:
 
 
 v1, v2 = Version3(1, 2), Version3(1, 3)
-print(v1 < v2)  # True
+print(v1 < v2)   # True
 print(v1 <= v2)  # True (auto-generated)
 print(v1 == v2)  # False
 print(v1 != v2)  # True (uses __eq__)
-print(v1 > v2)  # False (auto-generated)
+print(v1 > v2)   # False (auto-generated)
 print(v1 >= v2)  # False (auto-generated)

@@ -1,7 +1,11 @@
-# A virtual subclass in Python is a class that is registered as a subclass
-# of an Abstract Base Class (ABC) without actually inheriting from it.
-# The ABC does not enforce that the registered class actually implements the abstract methods.
-# It is up to the developer to ensure this.
+# A Virtual Subclass is a class that is "registered" into an Abstract Base Class (ABC) 
+# so that it passes isinstance() and issubclass() checks, even though it does not inherit from the ABC.
+# - No Inheritance: The class does not share the ABC's Method Resolution Order (MRO).
+# - No Enforcement (The "Pinky Promise"): Unlike standard inheritance, the ABC does not check 
+#   if the registered class actually implements the abstract methods. It blindly trusts that you 
+#   have implemented them.
+# - Use Case: Useful when you need to treat a class you cannot modify (like a built-in list 
+#   or a third-party class) as if it implements your specific interface.
 
 from abc import ABC, abstractmethod
 

@@ -1,14 +1,15 @@
-# Private Variables
+# Python has no strict access control (no 'private' or 'protected' keywords).
+# Nothing prevents clients from modifying attributes directly; data hiding is
+# entirely based on convention and programmer discipline. 
 
-# Single underscore (_var):
-# A single underscore before a variable name (e.g., _my_var) is a convention to indicate
-# that it is intended for internal use only. It is not enforced by Python, so it can still
-# be accessed from outside the class.
+# Weak Internal Use Indicator (_): A single leading underscore (e.g., _variable) is a semantic signal to
+# other programmers that an attribute is an implementation detail and part of the non-public API.
+# The interpreter does not enforce this.
 
-# Double underscore (__var):
-# A double underscore before a variable name (e.g., __my_var) triggers name mangling.
-# Python changes the name of the variable internally to _ClassName__my_var, making it harder
-# (but not impossible) to access from outside the class.
+# Name Mangling for Collision Avoidance (__): A double leading underscore (e.g., __variable) triggers
+# "name mangling". The interpreter textually replaces this with _ClassName__variable to prevent
+# namespace collisions in subclasses. It makes access harder (you must use
+# the mangled name), but it does not make the data truly private.
 
 
 class MyClass:

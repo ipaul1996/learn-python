@@ -33,6 +33,8 @@ Found an odd number 9
 # If the loop finishes without executing the break, the else clause executes, otherwise not.
 # Of course, other ways of ending the loop early, such as a return or a raised exception,
 # will also skip execution of the else clause.
+# Here the metal model for else block should be thought of as nobreak i.e., normal loop completion
+# without executing the break statement.
 
 # Example 1: for-else
 for n in range(2, 10):
@@ -76,3 +78,8 @@ while n < 10:
 """
 
 
+"""
+For Loops: Normal termination means the iterator is exhausted (it ran out of items).
+While Loops: Normal termination means the condition became false.
+For both of the above cases, else block will not be executed.
+"""

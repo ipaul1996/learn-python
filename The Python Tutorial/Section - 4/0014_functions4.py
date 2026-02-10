@@ -8,7 +8,7 @@ example_function(1, 2, 3)  # Positional arguments
 
 
 # Keyword Arguments matched by the parameter name, not position.
-# Can appear in any order after positional arguments.
+# They can appear in any order after positional arguments.
 def func(a, b):
     print(a, b)
 
