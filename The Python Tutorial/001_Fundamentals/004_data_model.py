@@ -1,24 +1,185 @@
-# Python Data Model
-
 """
-In Python everything is object.
-Every object has an identity, a type and a value.
+Python Data Model
+=================
 
-An object’s identity never changes once it has been created; you may think of it as the object’s address in memory.
-The id() function returns an integer representing its identity.
-The is operator compares the identity of two objects.
+Objects, Values, and Types
+---------------------------
 
-An object’s type determines the operations that the object supports (e.g., “does it have a length?”) and also defines the possible values for objects of that type.
-The type() function returns an object’s type (which is an object itself). Like its identity, an object’s type is also unchangeable.
+In Python, everything is an object.
+Every object has three fundamental properties: identity, type, and value.
 
-The value of some objects can change. Objects whose value can change are said to be mutable; objects whose value is unchangeable once they are created are called immutable. An object’s mutability is determined by its type; for instance, numbers, strings and tuples are immutable, while dictionaries and lists are mutable.
-The value of an immutable container object that contains a reference to a mutable object can change when the latter’s value is changed; however the container is still considered immutable, because the collection of objects it contains cannot be changed. For example, a tuple containing a list.
 
-Some objects contain references to other objects; these are called containers. Examples of containers are tuples, lists and dictionaries. The references are part of a container’s value. In most cases, when we talk about the value of a container, we imply the values, not the identities of the contained objects; however, when we talk about the mutability of a container, only the identities of the immediately contained objects are implied. So, if an immutable container (like a tuple) contains a reference to a mutable object, its value changes if that mutable object is changed.
+1. Object Identity
+   ---------------
+   An object's identity is unique and never changes once the object is created.
+   Think of it as the object's memory address.
 
-Types affect almost all aspects of object behavior. Even the importance of object identity is affected in some sense: for immutable types, operations that compute new values may actually return a reference to any existing object with the same type and value, while for mutable objects this is not allowed. For example, after a = 1; b = 1, a and b may or may not refer to the same object with the value one, depending on the implementation. This is because int is an immutable type, so the reference to 1 can be reused. This behaviour depends on the implementation used, so should not be relied upon, but is something to be aware of when making use of object identity tests. However, after c = []; d = [], c and d are guaranteed to refer to two different, unique, newly created empty lists. (Note that e = f = [] assigns the same object to both e and f.)
+   - The id() function returns an integer representing this identity
+   - The 'is' operator compares identities of two objects
 
-Some objects contain references to “external” resources such as open files or windows. It is understood that these resources are freed when the object is garbage-collected, but since garbage collection is not guaranteed to happen, such objects also provide an explicit way to release the external resource, usually a close() method. Programs are strongly recommended to explicitly close such objects. The try…finally statement and the with statement provide convenient ways to do this.
+   Examples:
+
+   x = [1, 2, 3]
+   y = x
+   z = [1, 2, 3]
+
+   print(id(x))         # e.g., 140234567890
+   print(id(y))         # Same as id(x)
+   print(id(z))         # Different from id(x)
+
+   print(x is y)        # True (same identity)
+   print(x is z)        # False (different identity)
+   print(x == z)        # True (same value)
+
+
+2. Object Type
+   -----------
+   An object's type determines:
+   - What operations the object supports (e.g., "does it have a length?")
+   - What values are valid for objects of that type
+
+   - The type() function returns an object's type (which is itself an object, an unique class object)
+   - An object's type is unchangeable (like its identity)
+
+   Examples:
+
+   x = 42
+   s = "hello"
+   lst = [1, 2, 3]
+
+   print(type(x))       # <class 'int'>
+   print(type(s))       # <class 'str'>
+   print(type(lst))     # <class 'list'>
+
+   print(type(int))     # <class 'type'> (type is itself an object)
+
+
+3. Object Value
+   ------------
+   Some objects' values can change; some cannot.
+
+   Mutable Objects:
+   - Objects whose value CAN change after creation
+   - Examples: lists, dictionaries, sets
+
+   Immutable Objects:
+   - Objects whose value CANNOT change after creation
+   - Examples: numbers (int, float), strings, tuples
+
+   - Mutability is determined by the object's type
+
+   Examples:
+
+   # Immutable: int
+   x = 10
+   # x cannot be changed, only reassigned to a new object
+   x = 20  # x now references a different int object
+
+   # Mutable: list
+   lst = [1, 2, 3]
+   lst.append(4)  # Same list object, value changed
+   print(lst)     # [1, 2, 3, 4]
+
+
+Containers and Mutability
+--------------------------
+
+Some objects contain references to other objects. These are called containers.
+Examples: tuples, lists, dictionaries.
+
+The references themselves are part of the container's value.
+
+Important distinction:
+- Container's value = the VALUES of contained objects (in most contexts)
+- Container's mutability = the IDENTITIES of immediately contained objects
+
+For an immutable container (like a tuple):
+- You cannot change WHICH objects it contains (identities are fixed)
+- But if it contains a mutable object, that object's VALUE can still change
+
+Examples:
+
+# Immutable container (tuple) with mutable object (list)
+t = ([1, 2], 'hello')
+
+print(id(t[0]))     # e.g., 140234567890
+
+# Cannot change which list the tuple refers to
+# t[0] = [3, 4]     # TypeError: 'tuple' does not support item assignment
+
+# But CAN modify the list that tuple contains
+t[0].append(3)
+print(t)            # ([1, 2, 3], 'hello')
+print(id(t[0]))     # Same identity as before
+
+# The tuple is still considered immutable because the collection
+# of objects it contains (their identities) has not changed.
+
+
+Type Behavior and Object Identity
+----------------------------------
+
+For immutable types:
+- Operations that compute new values MAY return a reference to an existing object
+  with the same type and value
+- Behavior is implementation-dependent
+
+For mutable types:
+- Each newly created object has a unique identity
+- This is not allowed to be optimized away
+
+Examples:
+
+# Immutable type (int): may or may not share identity
+a = 1
+b = 1
+print(a is b)  # True (CPython interns small integers)
+
+c = 1000
+d = 1000
+print(c is d)  # False (typically, larger integers are not interned)
+
+# But don't rely on this behavior!
+# Use == for value comparison, 'is' only for identity checking
+
+# Mutable type (list): guaranteed different identities
+x = []
+y = []
+print(x is y)  # False (always different objects)
+
+# Special case: assigning same object to multiple variables
+e = f = []
+print(e is f)  # True (both reference the SAME list object)
+
+
+External Resources and Cleanup
+-------------------------------
+
+Some objects contain references to external resources (open files, network sockets, etc.)
+
+These resources should be explicitly released because:
+- Garbage collection is not guaranteed to happen immediately
+- External resources are limited
+
+Methods for cleanup:
+- close() method: Explicitly releases the resource
+- try...finally statement: Ensures cleanup even with exceptions
+- with statement: Automatic cleanup (recommended)
+
+Examples:
+
+# Manual cleanup (not recommended)
+f = open('file.txt', 'r')
+try:
+    data = f.read()
+finally:
+    f.close()  # Guaranteed to execute
+
+# Automatic cleanup with 'with' (recommended)
+with open('file.txt', 'r') as f:
+    data = f.read()
+# File automatically closed when leaving 'with' block
+
 
 Types in Python:
 ----------------

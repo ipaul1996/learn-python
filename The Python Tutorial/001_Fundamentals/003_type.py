@@ -1,5 +1,10 @@
 # type()
-# The built-in `type()` function returns the type (class) of the given object.
+# The built-in `type()` function returns the type (class) of the given object i.e., the class object.
+# IMPORTANT: This class object is unique in memory.
+# Regardless of how many instances you create (t1, t2, t3...),
+# type(t1), type(t2), and the class name 'Test' all reference
+# the EXACT SAME object in memory.
+
 print(type(2))  # <class 'int'>
 print(type(42.0))  # <class 'float'>
 
@@ -41,6 +46,17 @@ print(type(42.0).__name__)  # float
 
 
 print(type(example_function))  # <class 'function'>
+
+
+class Test:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+t = Test(1, 2)
+print(type(t))  # <class '__main__.Test'>
+print(type(t).__name__)  # Test
 
 
 """

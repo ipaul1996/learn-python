@@ -100,7 +100,7 @@ print(str[len(str) - 1])  # '!' # Last character using length
 print(type(str[0]))  # <class 'str'>
 
 # Indexing overview:
-# Positive indices:   0, 1, 2, ..., len(str) - 1
+# Positive indices: 0, 1, 2, ..., len(str) - 1
 # Negative indices: -len(str), ..., -3, -2, -1
 # Both positive and negative indices can be used to access characters in a string.
 
