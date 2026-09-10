@@ -1,0 +1,182 @@
+
+Event Loop:
+
+The asyncio event loop is a single-threaded scheduler driven by cooperative multitasking. It maintains a ready queue 
+of jobs(Task objects) and rapidly switches between them whenever a task completes or voluntarily yields to maximize CPU utilization. 
+Yielding happens only at explicit await points—either on a low‑level non‑blocking I/O operation (like a socket read or await asyncio.sleep(2)) 
+or on another scheduled Task (await task). Until such a yield point, even await some_coro() runs sequentially down the call stack without 
+switching tasks. This means the loop can’t forecfully interrupt running code (i.e., it is not preemptive like OS thread schedular); It relies 
+entirely on the active Task to voluntarily pause and return control to the loop.
+
+*********************
+
+Coroutine function & Coroutine:
+
+async def fetch_data():          
+    await asyncio.sleep(1)
+    return "data"
+
+This is a coroutine function. A coroutine function returns a coroutine object when called. The coroutine object represents 
+the function's body but hasn't started executing yet.
+
+coro = fetch_data()  # This is a coroutine object
+print(coro)  # <coroutine object fetch_data at 0x...>
+
+*********************
+
+Awaiting a coroutine:
+
+async def main():
+    await fetch_data()   # This runs immediately, no context switch
+    print("This prints after fetch_data completes")
+
+- fetch_data() is a coroutine function. Calling it returns a coroutine object – a paused, not‑yet‑running function.
+- When you await that coroutine object, you are pushing it onto the current task's call stack and immediately begin 
+  executing its body. The event loop is not notified, and no separate Task is created or placed in the ready queue.
+- Execution proceeds synchronously within the current task, line by line, until one of two things happens:
+  - The coroutine completes and returns a value, or
+  - It hits an inner await that genuinely needs to wait (e.g., I/O, sleep, another task).
+
+
+*********************
+
+Awaiting a Task:
+
+async def main():
+    # Phase 1: Scheduling
+    task = asyncio.create_task(fetch_data())
+
+    # Phase 2: Do other work while task is pending...
+
+    # Phase 3: Synchronization
+    result = await task
+    print(result)
+
+
+A Task is a subclass of asyncio.Future.
+A Future is a low-level state-machine object meant to represent a computation's status and result. It has three states: "pending", "cancelled", 
+or "done". Crucially, a Future maintains a list of callback functions that should be executed the moment its state changes to "done".
+
+- When you call asyncio.create_task(coroutine), it instantly wraps the coroutine into a Task object and pushes it onto the 
+  the event loop’s ready queue. It does not start running the exact millisecond you call it. It sits in the 
+  queue until the current function yields control to the event loop and event loop runs it.
+- When you do await task, the await keyword first checks if the task is already done by inspecting its internal Future state. 
+  If its state is already "done" (because it completed in the background before you awaited it), it extracts the result and continues executing 
+  current coroutine synchronously without ever suspending. The event loop is never even notified.
+- If the state is "pending", the current coroutine cannot proceed. The await mechanism calls task.add_done_callback() to register a wakeup callback 
+  with the awaited task. This callback when fired, schedules the waiting coroutine (the one that called await task) to be resumed by the event loop 
+  (by placing it back on the event loop's ready queue).
+- The current coroutine (the one that executed await task) now executes a yield at the C level. This suspends it and returns control up the call stack 
+  to the event loop. The Event Loop is now free to pick up the next task in its Ready Queue.
+- Eventually, the event loop runs the scheduled task which internally starts or resumes the coroutine. When this coroutine executes its last line of 
+  code, it returns a value by raising a StopIteration exception. The Task wrapper catches this StopIteration exception, extracts the return value, and 
+  saves it. It marks the Future state as "done" and automatically fires all registered callbacks in the order of registration. Also, the wakeup callback 
+  we registered before fires, placing the original waiting coroutine back into the event loop's ready queue.
+- On the next event loop iteration, the waiting coroutine wakes up right at the await line, unwraps the saved result, and continues executing.
+
+*********************
+
+Running an Event Loop:
+
+import asyncio
+
+async def main():
+    await asyncio.sleep(1)
+    print("Hello, asyncio!")
+
+if __name__ == "__main__":
+    # This is a blocking, synchronous call that starts the async world.
+    asyncio.run(main())
+
+
+asyncio.run() is the gateway between the synchronous main thread of your OS and the asynchronous event loop. From the perspective 
+of your main Python thread, asyncio.run() is a standard, blocking synchronous function. The thread halts on this line until the 
+entire event loop finishes its lifecycle and shuts down.
+
+The Execution Lifecycle:
+When you call asyncio.run(main()), Python executes a strict, 4-step sequence:
+- Initialization: It creates a brand new event loop and sets it as the default loop for the current thread.
+- Execution: It schedules the passed coroutine (main()) as the primary Task and runs the loop until this specific task returns 
+  a result or throws an exception. During this time, other tasks can be created and run concurrently.
+- The Teardown: Once the main() task finishes, the loop does not just instantly vanish. It performs a strict 
+  cleanup phase:
+  - It cancels all remaining pending tasks (any tasks that were still running and not awaited).
+  - It explicitly injects a CancelledError into all of them.
+  - It runs the event loop briefly one last time to allow those tasks to execute their except CancelledError or finally blocks.
+  - It safely shuts down any active asynchronous generators (e.g., those created with async for) and executor pools (e.g., default thread pool).
+- Destruction: It closes the event loop entirely, releasing all associated resources (file descriptors, timers, etc.).
+
+*********************
+
+asyncio.gather():
+
+When a user requests their dashboard, your FastAPI endpoint might need to:
+- Fetch user profile from PostgreSQL (1 second)
+- Fetch recent orders from an internal microservice (2 seconds)
+- Fetch product recommendations from Redis (0.5 seconds)
+Because these three tasks do not depend on each other's outputs, running them sequentially is an architectural failure.
+Solution: asyncio.gather()
+
+asyncio.gather() is a high‑level function that lets you run multiple awaitable objects (coroutines, tasks, futures) concurrently and wait 
+for all of them to complete. It’s one of the most commonly used tools for parallel I/O in asyncio.
+
+results = await asyncio.gather(
+    some_coro("a"),
+    some_coro("b"),
+    some_task,
+    asyncio.sleep(2),
+    return_exceptions=False   # optional, default False
+)
+
+- Takes one or more awaitables as positional arguments.
+- Returns a list of results in the exact same order as the awaitables passed, regardless of which finished first.
+- If return_exceptions=False (default), the first raised exception is immediately propagated up the call stack. 
+  Crucially, it does NOT cancel the other tasks. The remaining tasks are orphaned and continue running silently in 
+  the background as "zombies" (a major source of memory and DB connection leaks in production). That from Python 3.11+
+  we have safer alternative of gather TaskGroup.
+- If return_exceptions=True, exceptions are treated like normal returns. The exception object itself is placed in the 
+  result list instead of raising it, allowing you to handle partial failures gracefully without crashing the whole request.
+
+How It Works?
+When you call gather(), it:
+- Automatically wraps each coroutine into a Task (if it isn't already a task). These tasks are pushed onto the event loop’s 
+  ready queue immediately.
+- Returns an aggregate Future that completes when all the provided awaitables have finished (or when the first one fails, 
+  if return_exceptions=False).
+- While waiting, the current coroutine is suspended, and the event loop context-switches to run other tasks (including the 
+  ones you just gathered).
+- Collects the final outputs and resumes your current coroutine with the populated list of results.
+
+Essentially, gather is a convenient way to say: “Start all these things concurrently right now, wait for the slowest one to 
+finish, and give me all the results in the exact order I asked for them.”
+
+
+*********************
+
+Timeouts (asyncio.wait_for):
+
+asyncio.wait_for is a mandatory wrapper for any I/O operation you do not strictly control (like third-party APIs or heavy 
+database queries).
+
+import asyncio
+
+async def fetch_external_api():
+    # Simulating a stalled third-party service
+    await asyncio.sleep(10) 
+    return {"data": "success"}
+
+async def main():
+    try:
+        # We only allow a maximum of 2.0 seconds for this operation
+        result = await asyncio.wait_for(fetch_external_api(), timeout=2.0)
+        print(result)
+    except asyncio.TimeoutError:
+        print("API took too long! Aborting.")
+
+How It Works:
+- Takes an awaitable and a timeout in seconds.
+- If the awaitable finishes before the timeout, it returns the result normally.
+- If the timeout is reached, it raises an asyncio.TimeoutError in your current function.
+- The crucial cleanup: Before raising the TimeoutError, wait_for automatically cancels the inner task (fetch_external_api). 
+  It does not leave a zombie task behind!
+
