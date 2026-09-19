@@ -200,34 +200,34 @@ This repository contains a structured Python tutorial covering everything from b
 
 ### Typing Module
 
-| #  | Topic                              | File                                        |
-|----|------------------------------------|---------------------------------------------|
-| 1  | Basic Type Hints (int, str, float) | [file_001.py](010_Typing%20Module/file_001.py) |
-| 2  | List, Dict, Set, Tuple Hints       | [file_002.py](010_Typing%20Module/file_002.py) |
-| 3  | Optional & Union                   | [file_003.py](010_Typing%20Module/file_003.py) |
-| 4  | Callable & Type Aliases            | [file_004.py](010_Typing%20Module/file_004.py) |
-| 5  | TypeVar & Generics                 | [file_005.py](010_Typing%20Module/file_005.py) |
-| 6  | Literal & Final                    | [file_006.py](010_Typing%20Module/file_006.py) |
-| 7  | TypedDict                          | [file_007.py](010_Typing%20Module/file_007.py) |
-| 8  | Protocol (Structural Subtyping)    | [file_008.py](010_Typing%20Module/file_008.py) |
-| 9  | Type Hints - Part 9                | [file_009.py](010_Typing%20Module/file_009.py) |
-| 10 | Type Hints - Part 10               | [file_010.py](010_Typing%20Module/file_010.py) |
-| 11 | Type Hints - Part 11               | [file_011.py](010_Typing%20Module/file_011.py) |
-| 12 | Type Hints - Part 12               | [file_012.py](010_Typing%20Module/file_012.py) |
-| 13 | Type Hints - Part 13               | [file_013.py](010_Typing%20Module/file_013.py) |
-| 14 | Type Hints - Part 14               | [file_014.py](010_Typing%20Module/file_014.py) |
-| 15 | Type Hints - Part 15               | [file_015.py](010_Typing%20Module/file_015.py) |
-| 16 | Type Hints - Part 16               | [file_016.py](010_Typing%20Module/file_016.py) |
-| 17 | Type Hints - Part 17               | [file_017.py](010_Typing%20Module/file_017.py) |
-| 18 | Type Hints - Part 18               | [file_018.py](010_Typing%20Module/file_018.py) |
-| 19 | Type Hints - Part 19               | [file_019.py](010_Typing%20Module/file_019.py) |
-| 20 | Type Hints - Part 20               | [file_020.py](010_Typing%20Module/file_020.py) |
-| 21 | Type Hints - Part 21               | [file_021.py](010_Typing%20Module/file_021.py) |
-| 22 | Type Hints - Part 22               | [file_022.py](010_Typing%20Module/file_022.py) |
-| 23 | Type Hints - Part 23               | [file_023.py](010_Typing%20Module/file_023.py) |
-| 24 | Type Hints - Part 24               | [file_024.py](010_Typing%20Module/file_024.py) |
-| 25 | Type Hints - Part 25               | [file_025.py](010_Typing%20Module/file_025.py) |
-| 26 | Type Hints - Part 26               | [file_026.py](010_Typing%20Module/file_026.py) |
+| #  | Topic                                                    | File                                        |
+|----|----------------------------------------------------------|---------------------------------------------|
+| 1  | Type Hints Basics (Variables, Functions, Any, Union)     | [file_001.py](010_Typing%20Module/file_001.py) |
+| 2  | Literal Types (Restrict to Exact Values)                 | [file_002.py](010_Typing%20Module/file_002.py) |
+| 3  | Type Alias (`type` Statement & Assignment)               | [file_003.py](010_Typing%20Module/file_003.py) |
+| 4  | NewType (Distinct Types for Static Analysis)             | [file_004.py](010_Typing%20Module/file_004.py) |
+| 5  | TypeVar (Generic Type Variables)                         | [file_005.py](010_Typing%20Module/file_005.py) |
+| 6  | Generic Classes (`Generic[T]`)                             | [file_006.py](010_Typing%20Module/file_006.py) |
+| 7  | Multiple TypeVars in Generic Classes                     | [file_007.py](010_Typing%20Module/file_007.py) |
+| 8  | Multiple TypeVars in Functions                           | [file_008.py](010_Typing%20Module/file_008.py) |
+| 9  | Invariant TypeVar (Default Behavior)                     | [file_009.py](010_Typing%20Module/file_009.py) |
+| 10 | Covariant TypeVar (`covariant=True`)                     | [file_010.py](010_Typing%20Module/file_010.py) |
+| 11 | Contravariant TypeVar (`contravariant=True`)             | [file_011.py](010_Typing%20Module/file_011.py) |
+| 12 | Final (Constants & Immutable Values)                     | [file_012.py](010_Typing%20Module/file_012.py) |
+| 13 | `@final` Decorator (No Subclassing/Overriding)           | [file_013.py](010_Typing%20Module/file_013.py) |
+| 14 | Sequence (Read-Only Ordered Collections)                 | [file_014.py](010_Typing%20Module/file_014.py) |
+| 15 | MutableSequence (Mutable Ordered Collections)            | [file_015.py](010_Typing%20Module/file_015.py) |
+| 16 | Mapping (Read-Only Key-Value Collections)                | [file_016.py](010_Typing%20Module/file_016.py) |
+| 17 | MutableMapping (Mutable Key-Value Collections)           | [file_017.py](010_Typing%20Module/file_017.py) |
+| 18 | Set (Mutable Unordered Collections)                      | [file_018.py](010_Typing%20Module/file_018.py) |
+| 19 | AbstractSet (Read-Only Set Collections)                  | [file_019.py](010_Typing%20Module/file_019.py) |
+| 20 | Iterable (Any Iterable Object)                           | [file_020.py](010_Typing%20Module/file_020.py) |
+| 21 | Iterator (`next()` & Single-Use Iteration)               | [file_021.py](010_Typing%20Module/file_021.py) |
+| 22 | Callable (Function Type Hints)                           | [file_022.py](010_Typing%20Module/file_022.py) |
+| 23 | Callable Variants (`...` & Higher-Order Functions)       | [file_023.py](010_Typing%20Module/file_023.py) |
+| 24 | ParamSpec (Preserving Callable Signatures)               | [file_024.py](010_Typing%20Module/file_024.py) |
+| 25 | TypedDict (`NotRequired` & `Required`)                   | [file_025.py](010_Typing%20Module/file_025.py) |
+| 26 | Annotated (Type Metadata for Validators)                 | [file_026.py](010_Typing%20Module/file_026.py) |
 
 ---
 
